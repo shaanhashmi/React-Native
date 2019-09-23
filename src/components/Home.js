@@ -1,27 +1,36 @@
 import React, { Component } from 'react'
-import { StyleSheet, Alert } from 'react-native'
+import { StyleSheet, Alert, Text, View } from 'react-native'
 import FlatListItem from './common/FlatListItem';
 import CustomModal from './common/CustomModal'
 
 class Home extends Component {
+	constructor(props) {
+		super(props)
 
-    setModalVisible(visible) {
-        this.setState({ modalVisible: false });
-    }
+		this.state = {
+			userDetails: null,
+			visible: false
+		}
+	}
 
-    handlePress = (item) => {
-        Alert.alert(item.name.first)
-    }
+	handlePress = (data) => {
+		this.setState({ userDetails: data, visible: true })
+		Alert.alert("Working...", data)
+
+	}
+
+	closeModal = (data) => {
+		this.setState({ visible: !this.state.visible })
+	}
 
 
-    render() {
-        return (
-            <>
-                <FlatListItem onPress={this.handlePress} />
-                <CustomModal />
-            </>
-        )
-    }
+	render() {
+		return (
+			<>
+				<FlatListItem onPressItem={this.handlePress} />
+			</>
+		)
+	}
 }
 
 
